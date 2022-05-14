@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/Pauloo27/logger"
+	"code.db.cafe/wombot/internal/bootstrap"
 )
 
 func main() {
-	logger.Info("Hello world :)")
+	bootstrap.Start()
 }
