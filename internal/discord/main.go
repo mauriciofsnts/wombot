@@ -18,7 +18,10 @@ func Start() error {
 		return err
 	}
 
-	dg.Identify.Intents = discordgo.PermissionAdministrator
+	// Register the messageCreate func as a callback for MessageCreate events.
+	dg.AddHandler(messageCreate)
+
+	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	err = dg.Open()
 	if err != nil {
@@ -33,4 +36,22 @@ func Start() error {
 	dg.Close()
 
 	return nil
+}
+
+func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	fmt.Println(m.Content)
+	// Ignore all messages created by the bot itself
+	// This isn't required in this specific example but it's a good practice.
+	if m.Author.ID == s.State.User.ID {
+		return
+	}
+	// If the message is "ping" reply with "Pong!"
+	if m.Content == "ping" {
+		s.ChannelMessageSend(m.ChannelID, "Pong!")
+	}
+
+	// If the message is "pong" reply with "Ping!"
+	if m.Content == "pong" {
+		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	}
 }
