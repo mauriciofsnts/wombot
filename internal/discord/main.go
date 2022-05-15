@@ -7,6 +7,8 @@ import (
 	"syscall"
 
 	"code.db.cafe/wombot/internal/config"
+	"code.db.cafe/wombot/internal/discord/commands"
+	"code.db.cafe/wombot/internal/discord/commands/categories/utils"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -18,12 +20,12 @@ func Start() error {
 		return err
 	}
 
-	// Register the messageCreate func as a callback for MessageCreate events.
-	dg.AddHandler(messageCreate)
+	registerCommands(dg, config.Wombot)
 
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	err = dg.Open()
+
 	if err != nil {
 		return err
 	}
@@ -38,20 +40,15 @@ func Start() error {
 	return nil
 }
 
-func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	fmt.Println(m.Content)
-	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but it's a good practice.
-	if m.Author.ID == s.State.User.ID {
-		return
-	}
-	// If the message is "ping" reply with "Pong!"
-	if m.Content == "ping" {
-		s.ChannelMessageSend(m.ChannelID, "Pong!")
+func registerCommands(s *discordgo.Session, cfg *config.Config) {
+	cmdHandler := commands.NewCommandHandler(cfg.Prefix)
+
+	cmdHandler.OnError = func(err error, ctx *commands.Context) {
+		ctx.Session.ChannelMessageSend(ctx.Message.ChannelID,
+			fmt.Sprintf("Command Execution failed: %s", err.Error()))
 	}
 
-	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
-	}
+	cmdHandler.RegisterCommand(&utils.CmdPing{})
+
+	s.AddHandler(cmdHandler.HandleMessage)
 }

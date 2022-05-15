@@ -1,5 +1,6 @@
 package config
 
 type Config struct {
-	Token string
+	Token  string
+	Prefix string
 }
