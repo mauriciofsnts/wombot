@@ -37,7 +37,7 @@ func (c *CommandHandler) RegisterMiddleware(mw Middleware) {
 }
 
 func (c *CommandHandler) HandleMessage(s *discordgo.Session, e *discordgo.MessageCreate) {
-	logger.Debug("Handling message: %s", e.Content)
+	logger.Debug("Handling message: %s", e.Message)
 	if e.Author.ID == s.State.User.ID || e.Author.Bot || !strings.HasPrefix(e.Content, c.prefix) {
 		return
 	}

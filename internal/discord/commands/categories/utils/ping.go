@@ -1,9 +1,8 @@
 package utils
 
 import (
-	"log"
-
 	"code.db.cafe/wombot/internal/discord/commands"
+	"github.com/bwmarrin/discordgo"
 )
 
 type CmdPing struct{}
@@ -21,7 +20,13 @@ func (c *CmdPing) AdminRequired() bool {
 }
 
 func (c *CmdPing) Exec(ctx *commands.Context) (err error) {
-	log.Println("Pong!")
-	_, err = ctx.Session.ChannelMessageSend(ctx.Message.ChannelID, "Pong!")
-	return
+
+	ctx.Success(&discordgo.MessageEmbed{
+		Description: "Pong!",
+		Footer: &discordgo.MessageEmbedFooter{
+			Text: "Os cria ta insano hein",
+		},
+	})
+
+	return nil
 }
