@@ -7,8 +7,8 @@ import (
 	"syscall"
 
 	"code.db.cafe/wombot/internal/config"
-	"code.db.cafe/wombot/internal/discord/commands"
-	"code.db.cafe/wombot/internal/discord/commands/categories/utils"
+	"code.db.cafe/wombot/internal/discord/slash"
+	"code.db.cafe/wombot/internal/discord/slash/categories/utils"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -20,11 +20,17 @@ func Start() error {
 		return err
 	}
 
-	registerCommands(dg, config.Wombot)
-
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	err = dg.Open()
+
+	if err != nil {
+		return err
+	}
+
+	slash.RegisterSlashCommand(utils.Ping)
+
+	err = slash.Start(dg)
 
 	if err != nil {
 		return err
@@ -38,17 +44,4 @@ func Start() error {
 	dg.Close()
 
 	return nil
-}
-
-func registerCommands(s *discordgo.Session, cfg *config.Config) {
-	cmdHandler := commands.NewCommandHandler(cfg.Prefix)
-
-	cmdHandler.OnError = func(err error, ctx *commands.Context) {
-		ctx.Session.ChannelMessageSend(ctx.Message.ChannelID,
-			fmt.Sprintf("Command Execution failed: %s", err.Error()))
-	}
-
-	cmdHandler.RegisterCommand(&utils.CmdPing{})
-
-	s.AddHandler(cmdHandler.HandleMessage)
 }

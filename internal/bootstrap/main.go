@@ -10,5 +10,6 @@ func Start() {
 	err := config.LoadConfig()
 	logger.HandleFatal(err, "Failed to load config")
 
-	discord.Start()
+	logger.HandleFatal(discord.Start(), "Failed to start discord")
+
 }
