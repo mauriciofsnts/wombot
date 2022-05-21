@@ -29,6 +29,7 @@ func Start() error {
 	}
 
 	slash.RegisterSlashCommand(utils.Ping)
+	slash.RegisterSlashCommand(utils.Setup)
 
 	err = slash.Start(dg)
 
