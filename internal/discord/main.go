@@ -8,8 +8,10 @@ import (
 
 	"code.db.cafe/wombot/internal/config"
 	"code.db.cafe/wombot/internal/discord/slash"
-	"code.db.cafe/wombot/internal/discord/slash/categories/utils"
 	"github.com/bwmarrin/discordgo"
+
+	// register commands
+	_ "code.db.cafe/wombot/internal/discord/slash/categories/utils"
 )
 
 func Start() error {
@@ -27,9 +29,6 @@ func Start() error {
 	if err != nil {
 		return err
 	}
-
-	slash.RegisterSlashCommand(utils.Ping)
-	slash.RegisterSlashCommand(utils.Setup)
 
 	err = slash.Start(dg)
 

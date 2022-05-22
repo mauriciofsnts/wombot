@@ -12,8 +12,10 @@ type SlashCommand struct {
 
 var commands = make(map[string]*SlashCommand)
 
-func RegisterSlashCommand(command *SlashCommand) {
-	commands[command.Name] = command
+func RegisterSlashCommand(cmds ...*SlashCommand) {
+	for _, command := range cmds {
+		commands[command.Name] = command
+	}
 }
 
 // cringe
