@@ -1,9 +1,10 @@
 package utils
 
 import (
-	"strconv"
+	"fmt"
 
 	"code.db.cafe/wombot/internal/discord/slash"
+	"code.db.cafe/wombot/internal/utils/reply"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -34,51 +35,25 @@ var Setup = &slash.SlashCommand{
 	Handler: func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		args := i.Interaction.ApplicationCommandData().Options
 
-		args = args
+		channel := args[1].ChannelValue(s)
 
-		// save the day goal on bd
+		if channel.Type != discordgo.ChannelTypeGuildText {
+			reply.Error(s, i, &discordgo.MessageEmbed{
+				Title:       "Error",
+				Description: fmt.Sprintf("Channel <#%s> is not a text channel", channel.ID),
+			})
 
-		// save the challenge channel on bd
+			return
+		}
 
-		s.InteractionRespond(
-			i.Interaction,
-			&discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Embeds: []*discordgo.MessageEmbed{
-						{
-							Title:       "Setup complete!",
-							Description: "O setup está quente!",
-							Color:       0x42f54b,
-							Image: &discordgo.MessageEmbedImage{
-								URL: "https://acegif.com/wp-content/gifs/race-car-11.gif",
-							},
-							Thumbnail: &discordgo.MessageEmbedThumbnail{
-								URL: "https://brandlogos.net/wp-content/uploads/2013/06/uefa-champions-league-eps-vector-logo.png",
-							},
-							Author: &discordgo.MessageEmbedAuthor{
-								Name:    "Wombot",
-								IconURL: "https://sm.ign.com/ign_br/cover/j/john-wick-/john-wick-chapter-4_129x.jpg",
-							},
-							Footer: &discordgo.MessageEmbedFooter{
-								Text:    "que pezinho uwu",
-								IconURL: "https://i.pinimg.com/originals/d3/d1/75/d3d175e560ae133f1ed5cd4ec173751a.png",
-							},
-							Fields: []*discordgo.MessageEmbedField{
-								{
-									Name:  "Day goal",
-									Value: strconv.Itoa(int(args[0].IntValue())),
-								},
-								{
-									Name:  "Channel id :v",
-									Value: args[1].ChannelValue(s).Name,
-								},
-							},
-						},
-					},
-				},
+		reply.Ok(s, i, &discordgo.MessageEmbed{
+			Title:       "Setup complete!",
+			Description: fmt.Sprintf("Now you will receive the challenges on the <#%s> :)", channel.ID),
+			Color:       0x42f54b,
+			Image: &discordgo.MessageEmbedImage{
+				URL: "https://media4.giphy.com/media/mCIjCgs3nWQWfJZvPA/giphy.gif?cid=ecf05e47565hfcdquq8ypqog4topsoelvgbayyk0yl182um9&rid=giphy.gif&ct=g",
 			},
-		)
+		})
 
 	},
 }
