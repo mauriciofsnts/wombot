@@ -23,3 +23,5 @@ go.work
 
 /wombot
 config.yml
+
+.vscode

@@ -7,10 +7,15 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+// :angry
+var permission int64 = discordgo.PermissionManageServer
+
 var Setup = &slash.SlashCommand{
+
 	ApplicationCommand: &discordgo.ApplicationCommand{
-		Name:        "setup",
-		Description: "Setup the bot",
+		Name:                     "setup",
+		Description:              "Setup the bot",
+		DefaultMemberPermissions: &permission,
 		Options: []*discordgo.ApplicationCommandOption{
 			{
 				Type:        discordgo.ApplicationCommandOptionInteger,
@@ -30,6 +35,7 @@ var Setup = &slash.SlashCommand{
 		args := i.Interaction.ApplicationCommandData().Options
 
 		args = args
+
 		// save the day goal on bd
 
 		// save the challenge channel on bd
