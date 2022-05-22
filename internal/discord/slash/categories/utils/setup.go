@@ -49,7 +49,6 @@ var Setup = &slash.SlashCommand{
 		reply.Ok(s, i, &discordgo.MessageEmbed{
 			Title:       "Setup complete!",
 			Description: fmt.Sprintf("Now you will receive the challenges on the <#%s> :)", channel.ID),
-			Color:       0x42f54b,
 			Image: &discordgo.MessageEmbedImage{
 				URL: "https://media4.giphy.com/media/mCIjCgs3nWQWfJZvPA/giphy.gif?cid=ecf05e47565hfcdquq8ypqog4topsoelvgbayyk0yl182um9&rid=giphy.gif&ct=g",
 			},

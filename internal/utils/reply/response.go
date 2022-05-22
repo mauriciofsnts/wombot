@@ -15,7 +15,7 @@ func Reply(s *discordgo.Session, i *discordgo.InteractionCreate, embed *discordg
 }
 
 func Error(s *discordgo.Session, i *discordgo.InteractionCreate, embed *discordgo.MessageEmbed) {
-	embed.Color = 0xFF0000
+	embed.Color = 0xe33e32
 	Reply(s, i, embed)
 }
 
