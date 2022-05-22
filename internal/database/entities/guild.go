@@ -6,5 +6,4 @@ type Guild struct {
 	CurrentDay int    `gorm:"not null"`
 	HourOfDay  int    `gorm:"not null"`
 	Language   string `gorm:"not null"`
-	DayGoal    int    `gorm:"not null"`
 }
