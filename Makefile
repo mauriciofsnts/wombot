@@ -6,6 +6,10 @@ TEST_COMMAND = gotest
 build:
 	go build -v -o $(BINARY_NAME) ./cmd/$(BINARY_NAME)
 
+.PHONY: dist
+dist: 
+	CGO_ENABLED=0 go build -gcflags=all=-l -v -ldflags="-w -s" -o $(BINARY_NAME) ./cmd/$(BINARY_NAME)
+
 .PHONY: run
 run: build
 	./$(BINARY_NAME) 
