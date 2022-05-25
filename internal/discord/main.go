@@ -11,7 +11,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 
 	// register commands
-	_ "code.db.cafe/wombot/internal/discord/slash/categories/utils"
+	_ "code.db.cafe/wombot/internal/discord/slash/categories"
 )
 
 func Start() error {
