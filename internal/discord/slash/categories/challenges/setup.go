@@ -52,6 +52,7 @@ func init() {
 
 				if channel.Type != discordgo.ChannelTypeGuildText {
 					reply.Error(s, i, &discordgo.MessageEmbed{
+						// Title:       "Error",
 						Title:       "Error",
 						Description: fmt.Sprintf("Channel <#%s> is not a text channel", channel.ID),
 					})

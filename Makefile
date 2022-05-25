@@ -1,6 +1,6 @@
 
 BINARY_NAME = wombot
-TEST_COMMAND = go test
+TEST_COMMAND = gotest
 
 .PHONY: build
 build:
