@@ -1,18 +1,15 @@
 package i18n_test
 
 import (
-	"fmt"
 	"testing"
 
+	"code.db.cafe/wombot/internal/i18n"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
-func TestReplaceSuccess(t *testing.T) {
-	fmt.Println("batata mi like")
-}
-
-func TestReplaceFail(t *testing.T) {
-	require.Equal(t, 1, 2)
-	assert.Equal(t, 1, 2)
+//meu primeiro teste em go uWu
+func TestReplace(t *testing.T) {
+	text := "Salve irmãozin, ${0} da ${1}"
+	replaced := i18n.Replace(text, "Wombot", 17)
+	assert.Equal(t, "Salve irmãozin, Wombot da 17", replaced)
 }
