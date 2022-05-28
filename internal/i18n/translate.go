@@ -1,33 +1,34 @@
 package i18n
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/ghodss/yaml"
 )
 
-type BotLanguage string
+type EnumLanguage string
 
 var (
-	Languages   []BotLanguage
-	languageMap map[BotLanguage]*Language = make(map[BotLanguage]*Language)
+	Languages   []EnumLanguage
+	languageMap map[EnumLanguage]*Language = make(map[EnumLanguage]*Language)
 )
 
-func newLanguage(key BotLanguage) BotLanguage {
+func newLanguageEnum(key EnumLanguage) EnumLanguage {
 	Languages = append(Languages, key)
-	return BotLanguage(key)
+	return EnumLanguage(key)
 }
 
 var (
-	LanguageEnglish   = newLanguage("en_US")
-	LanguageBrazilian = newLanguage("pt_BR")
-	LanguageCria      = newLanguage("pt_CRIA")
+	LanguageEnglish   = newLanguageEnum("en_US")
+	LanguageBrazilian = newLanguageEnum("pt_BR")
+	LanguageCria      = newLanguageEnum("pt_CRIA")
 )
 
-func loadLanguage(lang BotLanguage) error {
+func loadLanguage(lang EnumLanguage) error {
 
-	fileName := "internal/i18n/languages/" + string(lang) + ".json"
+	fileName := "internal/i18n/languages/" + string(lang) + ".yml"
 
 	data, err := os.ReadFile(fileName)
 
@@ -37,7 +38,7 @@ func loadLanguage(lang BotLanguage) error {
 
 	var language Language
 
-	err = json.Unmarshal(data, &language)
+	err = yaml.Unmarshal(data, &language)
 
 	if err != nil {
 		return err
@@ -59,12 +60,10 @@ func Start() error {
 	return nil
 }
 
-func Translate(lang BotLanguage) *Language {
+func GetLanguage(lang EnumLanguage) *Language {
 	language, found := languageMap[lang]
 
-	//  tá enviando um bgl erradao irmao
 	if !found {
-		//fallback de cria?
 		language = languageMap[LanguageCria]
 	}
 

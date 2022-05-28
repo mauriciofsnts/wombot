@@ -1,0 +1,27 @@
+# language metadata
+Lang:
+  Name: Português das ruas da 17
+  ShortName: pt-CRIA
+  Author: wombot
+
+# errors
+Errors:
+  Title: MANO DO CÉU
+  Generic: Nem eu entendi oq vc fez ${0}
+  ToSave: |
+    Aconteceu um acidente
+    O banco de dados não deu seta tio
+  ToSaveGif: https://media0.giphy.com/media/H55GsDjYV4S7VOdEMu/giphy.gif
+  NotATextChannel: não da para ouvir manda um zap
+
+Commands:
+  Ping:
+    Title: 🏓  Ping!
+    Response: Taca a mae para ver se quica
+    Gif: https://media1.giphy.com/media/Qu1bAqCr2O1PLiy71M/giphy.gif
+  Setup:
+    Title: Certinho tio
+    Response: |
+      Não tenha receio de desistir do bom para correr atrás do ótimo 
+      - MC Kevin
+    Gif: https://media4.giphy.com/media/26FeYw521G9Q4PFAY/giphy.gif

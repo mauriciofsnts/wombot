@@ -1,0 +1,23 @@
+# language metadata
+Lang:
+  Name: English
+  ShortName: en-US
+  Author: wombot
+
+# errors
+Errors:
+  Title: Error
+  Generic: An unknown error has occurred
+  ToSave: An error occurred when saving in the database
+  ToSaveGif: https://media2.giphy.com/media/xUPGcEliCc7bETyfO8/giphy.gif
+  NotATextChannel: Channel ${0} is not a text channel
+
+Commands:
+  Ping:
+    Title: 🏓  Ping!
+    Response: Pong 🏓
+    Gif: https://media0.giphy.com/media/fvA1ieS8rEV8Y/giphy.gif
+  Setup:
+    Title: Concluded Configuration
+    Response: Now you will receive the challenges on the channel ${0} at ${1} o'clock
+    Gif: https://media4.giphy.com/media/mCIjCgs3nWQWfJZvPA/giphy.gif

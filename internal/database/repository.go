@@ -1,8 +1,6 @@
 package database
 
 import (
-	"fmt"
-
 	"gorm.io/gorm"
 )
 
@@ -16,7 +14,6 @@ func NewRepository[T any, I any](db *gorm.DB, entity T) *Repository[T, I] {
 }
 
 func (r *Repository[T, I]) Create(t T) error {
-	fmt.Println(r.db)
 	return r.db.Create(t).Error
 }
 

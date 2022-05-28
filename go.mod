@@ -5,8 +5,8 @@ go 1.18
 require (
 	github.com/Pauloo27/logger v0.0.0-20220320171458-4991d8b58895
 	github.com/bwmarrin/discordgo v0.25.1-0.20220514195630-e45536276050
+	github.com/ghodss/yaml v1.0.0
 	github.com/stretchr/testify v1.7.0
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
 	gorm.io/driver/postgres v1.3.5
 	gorm.io/gorm v1.23.5
 )
@@ -32,4 +32,6 @@ require (
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
+	gopkg.in/yaml.v2 v2.2.2 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )

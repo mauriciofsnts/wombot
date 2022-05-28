@@ -1,0 +1,23 @@
+# language metadata
+Lang:
+  Name: Português
+  ShortName: pt-BR
+  Author: wombot
+
+# errors
+Errors:
+  Title: Erro
+  Generic: Ocorreu um erro desconhecido
+  ToSave: Ocorreu um erro ao salvar os dados
+  ToSaveGif: https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif
+  NotATextChannel: O canal ${0} não é um canal de texto
+
+Commands:
+  Ping:
+    Title: 🏓  Ping!
+    Response: Pong 🏓
+    Gif: https://media1.giphy.com/media/lWPpTGShahMiGD58Sx/giphy.gif
+  Setup:
+    Title: Configuração concluída
+    Response: Agora você irá receber os desafios no canal ${0} às ${1} horas
+    Gif: https://media4.giphy.com/media/26u4lOMA8JKSnL9Uk/giphy.gif

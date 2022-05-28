@@ -1,13 +1,19 @@
 package slash
 
 import (
+	"code.db.cafe/wombot/internal/i18n"
 	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 )
 
+type DiscordContext struct {
+	S *discordgo.Session
+	I *discordgo.InteractionCreate
+}
+
 type SlashCommand struct {
 	*discordgo.ApplicationCommand
-	Handler func(s *discordgo.Session, m *discordgo.InteractionCreate)
+	Handler func(ctx *DiscordContext, t *i18n.Language)
 }
 
 var commands = make(map[string]*SlashCommand)
@@ -18,7 +24,6 @@ func RegisterSlashCommand(cmds ...*SlashCommand) {
 	}
 }
 
-// cringe
 func Start(s *discordgo.Session) error {
 
 	applicationCommands := make([]*discordgo.ApplicationCommand, len(commands))
@@ -35,7 +40,13 @@ func Start(s *discordgo.Session) error {
 		commandName := i.ApplicationCommandData().Name
 
 		if command, ok := commands[commandName]; ok {
-			command.Handler(s, i)
+			command.Handler(
+				&DiscordContext{
+					S: s,
+					I: i,
+				},
+				i18n.GetLanguage(i18n.LanguageCria),
+			)
 		}
 
 	})

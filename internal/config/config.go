@@ -7,7 +7,6 @@ type Config struct {
 		Port     int
 		Username string
 		Password string
-		// snif snif
-		DbName string `yaml:"db_name"`
+		DbName   string
 	}
 }

@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	"gopkg.in/yaml.v3"
+	"github.com/ghodss/yaml"
 )
 
 var (

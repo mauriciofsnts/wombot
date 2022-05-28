@@ -9,14 +9,12 @@ import (
 	"code.db.cafe/wombot/internal/database/entities"
 	"code.db.cafe/wombot/internal/database/repos"
 	"code.db.cafe/wombot/internal/discord/slash"
-	"code.db.cafe/wombot/internal/utils/reply"
+	"code.db.cafe/wombot/internal/i18n"
 )
 
 var (
-	// :angry
 	permission int64 = discordgo.PermissionManageServer
-	// :angry again
-	min, max = 0.0, 23.0
+	min, max         = 0.0, 23.0
 )
 
 func init() {
@@ -44,23 +42,23 @@ func init() {
 					},
 				},
 			},
-			Handler: func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-				args := i.Interaction.ApplicationCommandData().Options
+			Handler: func(ctx *slash.DiscordContext, t *i18n.Language) {
 
-				channel := args[0].ChannelValue(s)
+				args := ctx.I.Interaction.ApplicationCommandData().Options
+
+				channel := args[0].ChannelValue(ctx.S)
 				hour := args[1].IntValue()
 
 				if channel.Type != discordgo.ChannelTypeGuildText {
-					reply.Error(s, i, &discordgo.MessageEmbed{
-						// Title:       "Error",
-						Title:       "Error",
-						Description: fmt.Sprintf("Channel <#%s> is not a text channel", channel.ID),
+					ctx.Error(&discordgo.MessageEmbed{
+						Title:       t.Errors.Title.Str(),
+						Description: t.Errors.NotATextChannel.Str(fmt.Sprintf("<#%s>", channel.ID)),
 					})
 					return
 				}
 
 				err := repos.Guild.Create(entities.Guild{
-					GuildID:    i.GuildID,
+					GuildID:    ctx.I.GuildID,
 					ChannelID:  channel.ID,
 					CurrentDay: 0,
 					HourOfDay:  hour,
@@ -69,21 +67,21 @@ func init() {
 				if err != nil {
 					logger.Error(err)
 
-					reply.Error(s, i, &discordgo.MessageEmbed{
-						Title:       "An error occurred when saving the data",
-						Description: "Robots are crazy",
+					ctx.Error(&discordgo.MessageEmbed{
+						Title:       t.Errors.Title.Str(),
+						Description: t.Errors.ToSave.Str(),
 						Image: &discordgo.MessageEmbedImage{
-							URL: "https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif?cid=ecf05e47gkz2ncyxh0bcdfeezwr50ppd8f7wapxs0qd4c4xj&rid=giphy.gif&ct=g",
+							URL: t.Errors.ToSaveGif.Str(),
 						},
 					})
 					return
 				}
 
-				reply.Ok(s, i, &discordgo.MessageEmbed{
-					Title:       "Setup complete!",
-					Description: fmt.Sprintf("Now you will receive the challenges on the <#%s> at %d:00 :)", channel.ID, hour),
+				ctx.Ok(&discordgo.MessageEmbed{
+					Title:       t.Commands.Setup.Title.Str(),
+					Description: t.Commands.Setup.Response.Str(fmt.Sprintf("<#%s>", channel.ID), hour),
 					Image: &discordgo.MessageEmbedImage{
-						URL: "https://media4.giphy.com/media/mCIjCgs3nWQWfJZvPA/giphy.gif?cid=ecf05e47565hfcdquq8ypqog4topsoelvgbayyk0yl182um9&rid=giphy.gif&ct=g",
+						URL: t.Commands.Setup.Gif.Str(),
 					},
 				})
 
