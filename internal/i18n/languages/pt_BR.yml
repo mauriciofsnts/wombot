@@ -8,9 +8,12 @@ Lang:
 Errors:
   Title: Erro
   Generic: Ocorreu um erro desconhecido
+  GenericGif: https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif
   ToSave: Ocorreu um erro ao salvar os dados
   ToSaveGif: https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif
   NotATextChannel: O canal ${0} não é um canal de texto
+  AlreadyRegistered: Você já está cadastrado
+  AlreadyRegisteredGif: https://media2.giphy.com/media/B7o99rIuystY4/giphy.gif
 
 Commands:
   Ping:
@@ -21,3 +24,7 @@ Commands:
     Title: Configuração concluída
     Response: Agora você irá receber os desafios no canal ${0} às ${1} horas
     Gif: https://media4.giphy.com/media/26u4lOMA8JKSnL9Uk/giphy.gif
+  Join:
+    Title: Tudo certo!
+    Response: Agora você faz parte do desafio
+    Gif: https://c.tenor.com/nZT5X9swNZ4AAAAd/jack-nicholson-yes.gif

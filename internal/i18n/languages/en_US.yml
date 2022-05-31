@@ -8,9 +8,12 @@ Lang:
 Errors:
   Title: Error
   Generic: An unknown error has occurred
+  GenericGif: https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif
   ToSave: An error occurred when saving in the database
   ToSaveGif: https://media2.giphy.com/media/xUPGcEliCc7bETyfO8/giphy.gif
   NotATextChannel: Channel ${0} is not a text channel
+  AlreadyRegistered: You are already registered
+  AlreadyRegisteredGif: https://media0.giphy.com/media/xThtaqsfM66PpYt7Pi/giphy.gif
 
 Commands:
   Ping:
@@ -21,3 +24,7 @@ Commands:
     Title: Concluded Configuration
     Response: Now you will receive the challenges on the channel ${0} at ${1} o'clock
     Gif: https://media4.giphy.com/media/mCIjCgs3nWQWfJZvPA/giphy.gif
+  Join:
+    Title: Alright!
+    Response: Now you are part of the challenge
+    Gif: https://media1.giphy.com/media/QxZ0nbcVgMlPlnfZos/giphy.gif

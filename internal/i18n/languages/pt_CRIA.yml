@@ -7,12 +7,15 @@ Lang:
 # errors
 Errors:
   Title: MANO DO CÉU
-  Generic: Nem eu entendi oq vc fez ${0}
+  Generic: Nem eu entendi oq vc fez 
+  GenericGif: https://media4.giphy.com/media/l46CwEYnbFtFfjZNS/giphy.gif
   ToSave: |
     Aconteceu um acidente
     O banco de dados não deu seta tio
   ToSaveGif: https://media0.giphy.com/media/H55GsDjYV4S7VOdEMu/giphy.gif
   NotATextChannel: não da para ouvir manda um zap
+  AlreadyRegistered: já tá na lista
+  AlreadyRegisteredGif: https://media2.giphy.com/media/B7o99rIuystY4/giphy.gif
 
 Commands:
   Ping:
@@ -25,3 +28,7 @@ Commands:
       Não tenha receio de desistir do bom para correr atrás do ótimo 
       - MC Kevin
     Gif: https://media4.giphy.com/media/26FeYw521G9Q4PFAY/giphy.gif
+  Join:
+    Title: Fechou então
+    Response: Não vai falhar na missão
+    Gif: https://media4.giphy.com/media/VbbXeIDh0aafJbA8Pj/giphy.gif

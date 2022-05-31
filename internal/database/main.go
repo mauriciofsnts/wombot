@@ -25,5 +25,5 @@ func Start() error {
 	// wtf ?
 	*Db = *db
 
-	return Db.AutoMigrate(&entities.Guild{})
+	return Db.AutoMigrate(&entities.User{}, &entities.Guild{})
 }

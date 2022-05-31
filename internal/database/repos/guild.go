@@ -6,3 +6,4 @@ import (
 )
 
 var Guild = database.NewRepository[entities.Guild, string](database.Db, entities.Guild{})
+var User = database.NewRepository[entities.User, string](database.Db, entities.User{})

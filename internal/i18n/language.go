@@ -13,11 +13,14 @@ type LanguageMetadata struct {
 }
 
 type Errors struct {
-	Title           LanguageEntry
-	Generic         LanguageEntry
-	ToSave          LanguageEntry
-	ToSaveGif       LanguageEntry
-	NotATextChannel LanguageEntry
+	Title                LanguageEntry
+	Generic              LanguageEntry
+	GenericGif           LanguageEntry
+	ToSave               LanguageEntry
+	ToSaveGif            LanguageEntry
+	NotATextChannel      LanguageEntry
+	AlreadyRegistered    LanguageEntry
+	AlreadyRegisteredGif LanguageEntry
 }
 
 type Command struct {
@@ -29,6 +32,7 @@ type Command struct {
 type Commands struct {
 	Ping  Command
 	Setup Command
+	Join  Command
 }
 
 type Language struct {

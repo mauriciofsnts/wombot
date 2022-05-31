@@ -80,6 +80,7 @@ func init() {
 				}
 
 				err := repos.Guild.Find(guild)
+				logger.Debug("err", err)
 
 				if err != nil {
 
@@ -92,7 +93,7 @@ func init() {
 					})
 
 					if createErr != nil {
-						logger.Error(err)
+						logger.Debug(err)
 
 						ctx.Error(&discordgo.MessageEmbed{
 							Title:       t.Errors.Title.Str(),
@@ -115,7 +116,7 @@ func init() {
 					})
 
 					if updateErr != nil {
-						logger.Error(err)
+						logger.Debug(updateErr)
 
 						ctx.Error(&discordgo.MessageEmbed{
 							Title:       t.Errors.Title.Str(),
