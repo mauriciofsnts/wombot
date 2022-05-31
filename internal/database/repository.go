@@ -17,12 +17,12 @@ func (r *Repository[T, I]) Create(t T) error {
 	return r.db.Create(t).Error
 }
 
-func (r *Repository[T, I]) Find(id I) error {
-	return r.db.Find(r.entity, id).Error
+func (r *Repository[T, I]) Find(m *T) error {
+	return r.db.Find(m).Error
 }
 
-func (r *Repository[T, I]) FindAll() error {
-	return r.db.Find(r.entity).Error
+func (r *Repository[T, I]) FindAll(m *T) error {
+	return r.db.Find(m).Error
 }
 
 func (r *Repository[T, I]) Update(t T) error {

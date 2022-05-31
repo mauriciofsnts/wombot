@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Pauloo27/logger"
 	"github.com/ghodss/yaml"
 )
 
@@ -49,15 +50,14 @@ func loadLanguage(lang EnumLanguage) error {
 	return nil
 }
 
-func Start() error {
+func init() {
 
 	for _, lang := range Languages {
 		if err := loadLanguage(lang); err != nil {
-			return err
+			logger.Fatal("Failed to load languages snif snif")
 		}
 	}
 
-	return nil
 }
 
 func GetLanguage(lang EnumLanguage) *Language {

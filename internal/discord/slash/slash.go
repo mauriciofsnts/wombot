@@ -1,6 +1,8 @@
 package slash
 
 import (
+	"code.db.cafe/wombot/internal/database/entities"
+	"code.db.cafe/wombot/internal/database/repos"
 	"code.db.cafe/wombot/internal/i18n"
 	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
@@ -37,6 +39,20 @@ func Start(s *discordgo.Session) error {
 	}
 
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		var guild = &entities.Guild{
+			GuildID: i.GuildID,
+		}
+
+		err := repos.Guild.Find(guild)
+
+		var lang i18n.EnumLanguage
+
+		if err != nil {
+			logger.Error("Cannot load the language from db")
+		} else {
+			lang = guild.Language
+		}
+
 		commandName := i.ApplicationCommandData().Name
 
 		if command, ok := commands[commandName]; ok {
@@ -45,7 +61,7 @@ func Start(s *discordgo.Session) error {
 					S: s,
 					I: i,
 				},
-				i18n.GetLanguage(i18n.LanguageCria),
+				i18n.GetLanguage(lang),
 			)
 		}
 

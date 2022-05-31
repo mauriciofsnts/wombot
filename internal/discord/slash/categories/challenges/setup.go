@@ -18,6 +18,16 @@ var (
 )
 
 func init() {
+
+	var languageMap []*discordgo.ApplicationCommandOptionChoice
+
+	for _, v := range i18n.Languages {
+		languageMap = append(languageMap, &discordgo.ApplicationCommandOptionChoice{
+			Name:  i18n.GetLanguage(v).Lang.Name.Str(),
+			Value: string(v),
+		})
+	}
+
 	slash.RegisterSlashCommand(
 		&slash.SlashCommand{
 
@@ -40,6 +50,13 @@ func init() {
 						MinValue:    &min,
 						MaxValue:    max,
 					},
+					{
+						Type:        discordgo.ApplicationCommandOptionString,
+						Name:        "language",
+						Description: "Set the language",
+						Required:    true,
+						Choices:     languageMap,
+					},
 				},
 			},
 			Handler: func(ctx *slash.DiscordContext, t *i18n.Language) {
@@ -48,6 +65,7 @@ func init() {
 
 				channel := args[0].ChannelValue(ctx.S)
 				hour := args[1].IntValue()
+				lang := args[2].StringValue()
 
 				if channel.Type != discordgo.ChannelTypeGuildText {
 					ctx.Error(&discordgo.MessageEmbed{
@@ -62,6 +80,7 @@ func init() {
 					ChannelID:  channel.ID,
 					CurrentDay: 0,
 					HourOfDay:  hour,
+					Language:   i18n.EnumLanguage(lang),
 				})
 
 				if err != nil {
