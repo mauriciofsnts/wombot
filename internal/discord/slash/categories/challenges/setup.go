@@ -75,25 +75,58 @@ func init() {
 					return
 				}
 
-				err := repos.Guild.Create(entities.Guild{
-					GuildID:    ctx.I.GuildID,
-					ChannelID:  channel.ID,
-					CurrentDay: 0,
-					HourOfDay:  hour,
-					Language:   i18n.EnumLanguage(lang),
-				})
+				var guild = &entities.Guild{
+					GuildID: ctx.I.GuildID,
+				}
+
+				err := repos.Guild.Find(guild)
 
 				if err != nil {
-					logger.Error(err)
 
-					ctx.Error(&discordgo.MessageEmbed{
-						Title:       t.Errors.Title.Str(),
-						Description: t.Errors.ToSave.Str(),
-						Image: &discordgo.MessageEmbedImage{
-							URL: t.Errors.ToSaveGif.Str(),
-						},
+					createErr := repos.Guild.Create(entities.Guild{
+						GuildID:    ctx.I.GuildID,
+						ChannelID:  channel.ID,
+						CurrentDay: 0,
+						HourOfDay:  hour,
+						Language:   i18n.EnumLanguage(lang),
 					})
-					return
+
+					if createErr != nil {
+						logger.Error(err)
+
+						ctx.Error(&discordgo.MessageEmbed{
+							Title:       t.Errors.Title.Str(),
+							Description: t.Errors.ToSave.Str(),
+							Image: &discordgo.MessageEmbedImage{
+								URL: t.Errors.ToSaveGif.Str(),
+							},
+						})
+						return
+					}
+
+				} else {
+
+					updateErr := repos.Guild.Update(entities.Guild{
+						GuildID:    ctx.I.GuildID,
+						ChannelID:  channel.ID,
+						CurrentDay: 0,
+						HourOfDay:  hour,
+						Language:   i18n.EnumLanguage(lang),
+					})
+
+					if updateErr != nil {
+						logger.Error(err)
+
+						ctx.Error(&discordgo.MessageEmbed{
+							Title:       t.Errors.Title.Str(),
+							Description: t.Errors.ToSave.Str(),
+							Image: &discordgo.MessageEmbedImage{
+								URL: t.Errors.ToSaveGif.Str(),
+							},
+						})
+						return
+					}
+
 				}
 
 				ctx.Ok(&discordgo.MessageEmbed{
