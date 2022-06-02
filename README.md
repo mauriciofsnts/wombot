@@ -1,3 +1,3 @@
-# wombat
+# wombot
 
-the best daily ui bot of all
+the best daily ui bot of all :)
