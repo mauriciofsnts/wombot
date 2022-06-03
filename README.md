@@ -1,3 +1,5 @@
 # wombat
 
-the best daily ui bot of all
+the best daily ui bot of all time
+
+now avaliable in linux :)
