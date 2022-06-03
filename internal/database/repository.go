@@ -21,7 +21,7 @@ func (r *Repository[T, I]) Find(m *T) error {
 	return r.db.First(m).Error
 }
 
-func (r *Repository[T, I]) FindAll(m *T) error {
+func (r *Repository[T, I]) FindAll(m *[]T) error {
 	return r.db.Find(m).Error
 }
 
