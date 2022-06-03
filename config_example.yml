@@ -7,4 +7,4 @@ pg:
   host: localhost
   username: postgres
   password: password :)
-  db_name: wombot
+  dbName: wombot
