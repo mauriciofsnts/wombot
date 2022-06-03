@@ -32,7 +32,7 @@ func Start(s *discordgo.Session) error {
 
 	i := 0
 	for _, c := range commands {
-		logger.Debugf("Registering command: %s", c.Name)
+		logger.Successf("Registering command: %s", c.Name)
 
 		applicationCommands[i] = c.ApplicationCommand
 		i++

@@ -1,13 +1,13 @@
 package discord
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"code.db.cafe/wombot/internal/config"
 	"code.db.cafe/wombot/internal/discord/slash"
+	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 
 	// register commands
@@ -36,7 +36,7 @@ func Start() error {
 		return err
 	}
 
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	logger.Success("Bot is now running.  Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
