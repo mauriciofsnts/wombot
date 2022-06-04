@@ -32,3 +32,8 @@ Commands:
     Title: Fechou então
     Response: Não vai falhar na missão
     Gif: https://media4.giphy.com/media/VbbXeIDh0aafJbA8Pj/giphy.gif
+
+Challenges: 
+  Title: Novo desafio a caminho!
+  Description: Desafio ${0} - ${1}
+  Footer: Os envios serão aceitos até ${0}

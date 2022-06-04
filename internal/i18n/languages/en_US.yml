@@ -28,3 +28,9 @@ Commands:
     Title: Alright!
     Response: Now you are part of the challenge
     Gif: https://media1.giphy.com/media/QxZ0nbcVgMlPlnfZos/giphy.gif
+
+
+Challenges: 
+  Title: Novo desafio a caminho!
+  Description: Desafio ${0} - ${1}
+  Footer: Os envios serão aceitos até ${0}

@@ -28,3 +28,8 @@ Commands:
     Title: Tudo certo!
     Response: Agora você faz parte do desafio
     Gif: https://c.tenor.com/nZT5X9swNZ4AAAAd/jack-nicholson-yes.gif
+
+Challenges: 
+  Title: Novo desafio a caminho!
+  Description: Desafio ${0} - ${1}
+  Footer: Os envios serão aceitos até ${0}

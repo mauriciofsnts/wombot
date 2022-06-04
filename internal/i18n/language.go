@@ -36,7 +36,14 @@ type Commands struct {
 }
 
 type Language struct {
-	Lang     LanguageMetadata
-	Errors   Errors
-	Commands Commands
+	Lang       LanguageMetadata
+	Errors     Errors
+	Commands   Commands
+	Challenges Challenges
+}
+
+type Challenges struct {
+	Title       LanguageEntry
+	Description LanguageEntry
+	Footer      LanguageEntry
 }
