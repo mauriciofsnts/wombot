@@ -3,20 +3,20 @@ package challenges
 import (
 	"code.db.cafe/wombot/internal/database/entities"
 	"code.db.cafe/wombot/internal/database/repos"
-	"code.db.cafe/wombot/internal/discord/slash"
+	"code.db.cafe/wombot/internal/discord/events"
 	"code.db.cafe/wombot/internal/i18n"
 	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 )
 
 func init() {
-	slash.RegisterSlashCommand(
-		&slash.SlashCommand{
+	events.RegisterSlashCommand(
+		&events.SlashCommand{
 			ApplicationCommand: &discordgo.ApplicationCommand{
 				Name:        "join",
 				Description: "Join a challenge",
 			},
-			Handler: func(ctx *slash.DiscordContext, t *i18n.Language) {
+			Handler: func(ctx *events.DiscordContext, t *i18n.Language) {
 
 				if ctx.I.GuildID == "" {
 					ctx.Error(&discordgo.MessageEmbed{

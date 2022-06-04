@@ -6,12 +6,12 @@ import (
 	"syscall"
 
 	"code.db.cafe/wombot/internal/config"
-	"code.db.cafe/wombot/internal/discord/slash"
+	"code.db.cafe/wombot/internal/discord/events"
 	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 
 	// register commands
-	_ "code.db.cafe/wombot/internal/discord/slash/categories"
+	_ "code.db.cafe/wombot/internal/discord/events/categories"
 )
 
 func Start() error {
@@ -30,13 +30,13 @@ func Start() error {
 		return err
 	}
 
-	err = slash.Start(dg)
+	err = events.Start(dg)
 
 	if err != nil {
 		return err
 	}
 
-	slash.StartCron(dg)
+	events.StartCron(dg)
 
 	logger.Success("Bot is now running.  Press CTRL-C to exit.")
 
