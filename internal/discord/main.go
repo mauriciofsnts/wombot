@@ -7,6 +7,7 @@ import (
 
 	"code.db.cafe/wombot/internal/config"
 	"code.db.cafe/wombot/internal/discord/events"
+	"code.db.cafe/wombot/internal/discord/events/crons"
 	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 
@@ -36,7 +37,7 @@ func Start() error {
 		return err
 	}
 
-	events.StartCron(dg)
+	crons.StartCron(dg)
 
 	logger.Success("Bot is now running.  Press CTRL-C to exit.")
 

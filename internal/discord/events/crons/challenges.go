@@ -1,8 +1,6 @@
-package events
+package crons
 
 import (
-	"time"
-
 	"code.db.cafe/wombot/internal/database/entities"
 	"code.db.cafe/wombot/internal/database/repos"
 	"code.db.cafe/wombot/internal/i18n"
@@ -11,12 +9,9 @@ import (
 	"github.com/go-co-op/gocron"
 )
 
-func StartCron(session *discordgo.Session) {
-	s := gocron.NewScheduler(time.UTC)
+func Challenges(s *gocron.Scheduler, session *discordgo.Session) {
 
-	// challenges []
-
-	s.Every(50).Second().Do(func() {
+	s.Every(5).Minutes().Do(func() {
 		var guilds []entities.Guild
 
 		err := repos.Guild.FindAll(&guilds)
@@ -26,12 +21,10 @@ func StartCron(session *discordgo.Session) {
 			return
 		}
 
-		logger.Success("Guilds", guilds)
-
 		for _, guild := range guilds {
 			t := i18n.GetLanguage(guild.Language)
 
-			session.ChannelMessageSendEmbed(guild.ChannelID, &discordgo.MessageEmbed{
+			msg, err := session.ChannelMessageSendEmbed(guild.ChannelID, &discordgo.MessageEmbed{
 				Title:       t.Challenges.Title.Str(),
 				Description: t.Challenges.Description.Str("#1", "Tela de login"),
 				Image: &discordgo.MessageEmbedImage{
@@ -42,9 +35,16 @@ func StartCron(session *discordgo.Session) {
 				},
 				Color: 0x0bf6f6,
 			})
+
+			if err != nil {
+				logger.Error("Failed to create a message")
+			}
+
+			session.MessageReactionAdd(guild.ChannelID, msg.ID, "🤯")
+			session.MessageReactionAdd(guild.ChannelID, msg.ID, "👍")
+			session.MessageReactionAdd(guild.ChannelID, msg.ID, "👎")
 		}
 
 	})
 
-	s.StartAsync()
 }
