@@ -14,7 +14,7 @@ import (
 
 func Challenges(s *gocron.Scheduler, session *discordgo.Session) {
 
-	s.Every(5).Minutes().Do(func() {
+	s.Every(1).Day().Do(func() {
 		var guilds []entities.Guild
 
 		err := repos.Guild.FindAll(&guilds)

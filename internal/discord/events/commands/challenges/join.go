@@ -5,7 +5,6 @@ import (
 	"code.db.cafe/wombot/internal/database/repos"
 	"code.db.cafe/wombot/internal/discord/events"
 	"code.db.cafe/wombot/internal/i18n"
-	"github.com/Pauloo27/logger"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -35,8 +34,6 @@ func init() {
 				}
 
 				err := repos.User.Find(user)
-
-				logger.Debug("Errrrrr", err)
 
 				if err == nil {
 
